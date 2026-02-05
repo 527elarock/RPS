@@ -1,0 +1,468 @@
+/* General Body Styling */
+body {
+
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: url('galaxy.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+/* Optional: simple star background */
+body::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: transparent black;
+    animation: star-move 120s linear infinite;
+    z-index: -1;
+}
+
+@keyframes star-move {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Container */
+.container {
+    position: relative;
+    text-align: center;
+    max-width: 700px;
+    padding: 20px;
+}
+
+/* Heading */
+/* STAR WARS Main Title - Crisp Version */
+h1 {
+    font-family: 'Star Jedi', sans-serif;
+    font-size: 5em;
+    margin-bottom: 30px;
+    color: #ffe81f;
+    /* Classic Star Wars yellow */
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow:
+        0 0 2px #ffe81f,
+        0 0 4px #ffd700,
+        0 0 6px #ffd700,
+        0 0 8px #ffcc00;
+    /* smaller, sharper glows */
+    background: linear-gradient(90deg, #fff400, #ffd700, #ffc700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Subtle glowing animation */
+@keyframes glow {
+    0% {
+        text-shadow:
+            0 0 1px #ffe81f,
+            0 0 3px #ffd700,
+            0 0 4px #ffd700,
+            0 0 6px #ffcc00;
+    }
+
+    100% {
+        text-shadow:
+            0 0 2px #ffe81f,
+            0 0 4px #ffd700,
+            0 0 6px #ffd700,
+            0 0 8px #ffcc00;
+    }
+}
+
+/* Front Image */
+.front-image {
+    width: 400px;
+    max-width: 80%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+}
+
+/* General Button Styling */
+.buttons .btn,
+.game-buttons .option-btn {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 10px;
+}
+
+/* ---------- UPDATED HOME PAGE BUTTONS ---------- */
+
+/* Jedi Buttons - outlined version */
+.btn.jedi {
+    background-color: transparent;
+    /* Transparent instead of filled */
+    color: #00bfff;
+    /* Jedi blue text */
+    border: 3px solid #00bfff;
+    /* Outline color */
+    padding: 12px 30px;
+    font-size: 1.5em;
+    text-decoration: none;
+    /* Remove underline */
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.btn.jedi:hover {
+    background-color: #00bfff;
+    color: white;
+    box-shadow: 0 0 20px #00bfff, 0 0 30px #00bfff inset;
+    transform: scale(1.1);
+}
+
+/* Sith Buttons - outlined version */
+.btn.sith {
+    background-color: transparent;
+    /* Transparent instead of filled */
+    color: #ff4d4d;
+    /* Sith red text */
+    border: 3px solid #ff4d4d;
+    /* Outline color */
+    padding: 12px 30px;
+    font-size: 1.5em;
+    text-decoration: none;
+    /* Remove underline */
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.btn.sith:hover {
+    background-color: #ff4d4d;
+    color: white;
+    box-shadow: 0 0 20px #ff4d4d, 0 0 30px #ff4d4d inset;
+    transform: scale(1.1);
+}
+
+/* Game Image Buttons */
+.game-buttons .option-btn {
+    width: 130px;
+    border: 2px solid transparent;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.game-buttons .option-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px currentColor;
+}
+
+/* Score and Results */
+#score {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.results p {
+    font-size: 1.3em;
+    margin: 10px 0;
+}
+
+/* Page-specific colors */
+body.jedi h1 {
+    color: #00bfff;
+}
+
+body.jedi #score {
+    color: #00bfff;
+}
+
+body.jedi .game-buttons .option-btn {
+    color: #00bfff;
+}
+
+body.sith h1 {
+    color: #ff4d4d;
+}
+
+body.sith #score {
+    color: #ff4d4d;
+}
+
+body.sith .game-buttons .option-btn {
+    color: #ff4d4d;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    .game-buttons .option-btn {
+        width: 100px;
+        margin: 10px;
+    }
+
+    .btn.jedi,
+    .btn.sith {
+        font-size: 1.3em;
+        padding: 10px 20px;
+    }
+}
+
+/* Back to Home Button Styling */
+.back-btn {
+    display: inline-block;
+    margin-top: 50px;
+    /* Lower on the page */
+    padding: 15px 50px;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 3px #000;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Jedi Back Button */
+body.jedi .back-btn {
+    background-color: #0077ff;
+    color: white;
+    border: 2px solid #00bfff;
+    box-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff inset;
+}
+
+body.jedi .back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00bfff, 0 0 40px #00bfff inset;
+    background: linear-gradient(145deg, #00bfff, #0077ff, #00d0ff);
+}
+
+/* Sith Back Button */
+body.sith .back-btn {
+    background-color: #cc0000;
+    color: white;
+    border: 2px solid #ff4d4d;
+    box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d inset;
+}
+
+body.sith .back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff4d4d, 0 0 40px #ff4d4d inset;
+    background: linear-gradient(145deg, #ff4d4d, #cc0000, #ff6666);
+}
+
+/* Optional: small animated shine effect */
+.back-btn::after {
+    content: '';
+}
+/* Score fixed at top */
+#score-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    font-weight: bold;
+    color: inherit;
+    /* matches Jedi or Sith color */
+    text-shadow: 0 0 5px currentColor;
+    z-index: 100;
+}
+
+/* Winner popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 30px 50px;
+    border: 3px solid currentColor;
+    border-radius: 12px;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 0 0 20px currentColor, 0 0 40px currentColor inset;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 200;
+}
+
+/* Show popup */
+.popup.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* Page title styling */
+.page-title {
+    font-family: 'Star Jedi', sans-serif;
+    font-size: 5em;
+    color: #ffe81f;
+    /* classic Star Wars yellow */
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 30px 0 10px 0;
+    text-shadow:
+        0 0 2px #ffe81f,
+        0 0 4px #ffd700,
+        0 0 6px #ffd700,
+        0 0 8px #ffcc00;
+    background: linear-gradient(90deg, #fff400, #ffd700, #ffc700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowTitle 2s ease-in-out infinite alternate;
+    transition: transform 0.3s;
+    cursor: default;
+}
+
+/* Title hover pulse */
+.page-title:hover {
+    transform: scale(1.05);
+    text-shadow:
+        0 0 5px #ffe81f,
+        0 0 10px #ffd700,
+        0 0 15px #ffc700,
+        0 0 20px #fff400;
+}
+
+/* Glowing animation */
+@keyframes glowTitle {
+    0% {
+        text-shadow:
+            0 0 2px #ffe81f,
+            0 0 4px #ffd700,
+            0 0 6px #ffd700,
+            0 0 8px #ffcc00;
+    }
+
+    100% {
+        text-shadow:
+            0 0 4px #ffe81f,
+            0 0 8px #ffd700,
+            0 0 12px #ffd700,
+            0 0 16px #ffcc00;
+    }
+}
+
+/* Score below title with glow */
+#score-container {
+    font-size: 2em;
+    font-weight: bold;
+    color: currentColor;
+    /* matches Jedi or Sith color */
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor inset;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Winner popup */
+.popup {
+    display: none; /* hidden by default */
+    position: absolute;
+    top: 120px; /* adjust to appear below title */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.8);
+    padding: 20px 40px;
+    border: 3px solid white;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    z-index: 100;
+    pointer-events: none; /* lets you still click the buttons */
+    transition: all 0.3s ease;
+}
+
+/* Effect container for animations */
+#effect-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* so buttons remain clickable */
+    overflow: hidden;
+    z-index: 300;
+}
+
+/* Lightsaber swipe */
+.lightsaber-swipe {
+    position: absolute;
+    width: 200px;
+    height: 10px;
+    background: linear-gradient(90deg, transparent, #00bfff, #00bfff, transparent);
+    transform: rotate(45deg);
+    animation: swipe 0.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 400;
+}
+
+body.sith .lightsaber-swipe {
+    background: linear-gradient(90deg, transparent, #ff4d4d, #ff4d4d, transparent);
+}
+
+@keyframes swipe {
+    0% { transform: translate(0,0) rotate(45deg); opacity: 1; }
+    100% { transform: translate(500px, -200px) rotate(45deg); opacity: 0; }
+}
+
+/* Blaster flash */
+.blaster-flash {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    animation: flash 0.3s ease-out forwards;
+    pointer-events: none;
+    z-index: 400;
+}
+
+body.jedi .blaster-flash { background: rgba(0,191,255,0.7); }
+body.sith .blaster-flash { background: rgba(255,77,77,0.7); }
+
+@keyframes flash {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* Force push ripple */
+.force-push {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    border: 3px solid currentColor;
+    animation: force 0.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 400;
+}
+
+@keyframes force {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(5); opacity: 0; }
+}
+
+/* Score glow pulse */
+@keyframes score-pulse {
+    0% { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor inset; }
+    50% { text-shadow: 0 0 25px currentColor, 0 0 50px currentColor inset; }
+    100% { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor inset; }
+}
