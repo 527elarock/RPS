@@ -1,27 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STAR WARS</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.cdnfonts.com/css/star-jedi" rel="stylesheet">
+    <title>Star Wars Battle Game</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/jkp0svo.css">
 </head>
+
 <body>
 
-  <div class="container">
-    <!-- STAR WARS title above the duel image -->
-    <h1>STAR WARS</h1>
+<div class="container text-center">
 
-    <!-- Front duel image -->
-    <img src="duel.png" alt="Duel" class="front-image">
+    <h1 class="mt-4"> Star Wars Battle Arena </h1>
 
-    <!-- Buttons to choose side -->
-    <div class="buttons">
-      <a href="jedi.html" class="btn jedi">Jedi</a>
-      <a href="sith.html" class="btn sith">Sith</a>
+    <h3 id="welcome"></h3>
+    <p id="roundDisplay">Round: 0 / 5</p>
+
+    <!-- Score -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4 id="userScore">Your Wins: 0</h4>
+        </div>
+        <div class="col-md-6">
+            <h4 id="computerScore">Empire Wins: 0</h4>
+        </div>
     </div>
-  </div>
+
+    <!-- Choices -->
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <img src="jedisaber.png"
+             class="choice-img"
+             onclick="playGame('lightsaber')">
+    </div>
+
+    <div class="col-md-4">
+        <img src="jediblaster.png"
+             class="choice-img blaster-img"
+             onclick="playGame('blaster')">
+    </div>
+
+    <div class="col-md-4">
+        <img src="jediforce.png"
+             class="choice-img"
+             onclick="playGame('force')">
+    </div>
+
+</div>
+
+
+
+    <!-- Results -->
+    <div class="mt-4">
+        <p id="displayChoices"></p>
+        <p id="roundResult"></p>
+        <h3 id="finalResult"></h3>
+    </div>
+
+    <button id="resetBtn"
+            class="btn btn-danger mt-3"
+            onclick="resetGame()"
+            style="display:none;">
+        Play Again
+    </button>
+
+</div>
+
+<script src="game.js"></script>
 
 </body>
 </html>

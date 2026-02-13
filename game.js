@@ -1,84 +1,194 @@
 
-let score = 0;
+var userName;
+var userWins = 0;
+var computerWins = 0;
+var roundNumber = 0;
+var maxRounds = 5;
+
+var choices = ["lightsaber", "blaster", "force"];
+
+var winMessages = [
+    "The Force is strong with you!",
+    "Victory for the Jedi!",
+    "You defeated the Empire!"
+];
+
+var loseMessages = [
+    "The Dark Side wins...",
+    "The Empire strikes back!",
+    "You were defeated by the Sith!"
+];
 
 
-const buttons = document.querySelectorAll(".option-btn");
 
+window.onload = function () {
 
-const scoreDisplay = document.getElementById("score");
-const cpuChoiceDisplay = document.getElementById("cpu-choice");
-const winnerPopup = document.getElementById("winner-popup");
-const winnerText = document.getElementById("winner-text");
+    userName = prompt("Enter your Jedi name:");
 
+    if (userName === null || userName === "") {
+        userName = "Young Padawan";
+    }
 
-const isJediPage = document.body.classList.contains("jedi");
-const glowColor = isJediPage ? "#00bfff" : "#ff4d4d";
+    document.getElementById("welcome").innerHTML =
+        "Welcome, " + userName + "!";
 
-
-const choices = ["blaster", "force", "saber"];
-const beats = {
-  blaster: "saber",   
-  force: "blaster",  
-  saber: "force"     
+    updateRoundDisplay();
 };
 
 
-function showWinner(playerMove, computerMove, result) {
-  winnerText.innerHTML = `
-    You chose: <strong>${playerMove.toUpperCase()}</strong><br>
-    Opponent chose: <strong>${computerMove.toUpperCase()}</strong><br>
-    <strong>${result}</strong>
-  `;
-
-  winnerPopup.style.display = "block";
-  winnerPopup.style.borderColor = glowColor;
-  winnerPopup.style.boxShadow = `0 0 20px ${glowColor}, 0 0 40px ${glowColor} inset`;
 
 
-  setTimeout(() => {
-    winnerPopup.style.display = "none";
-  }, 1500);
+function playGame(userChoice) {
+
+
+  if (roundNumber === maxRounds) {
+        return;
+    }
+
+    var computerChoice = getComputerChoice();
+
+    showChoices(userChoice, computerChoice);
+
+    decideWinner(userChoice, computerChoice);
+
+    roundNumber = roundNumber + 1;
+
+    updateRoundDisplay();
+
+    if (roundNumber === maxRounds) {
+        endGame();
+    }
 }
+
+
+
+
+function getComputerChoice() {
+
+    var randomNumber =
+        Math.floor(Math.random() * 3);
+
+    return choices[randomNumber];
+}
+
+
+
+
+function showChoices(userChoice, computerChoice) {
+
+    document.getElementById("displayChoices").innerHTML =
+        userName + " chose " + userChoice +
+        " | Empire chose " + computerChoice;
+}
+
+
+
+
+function decideWinner(userChoice, computerChoice) {
+
+    if (userChoice === computerChoice) {
+        document.getElementById("roundResult").innerHTML =
+            "This round is a draw!";
+    }
+
+    else if (
+        (userChoice === "lightsaber" && computerChoice === "blaster") ||
+        (userChoice === "blaster" && computerChoice === "force") ||
+        (userChoice === "force" && computerChoice === "lightsaber")
+    ) {
+        userWins = userWins + 1;
+
+        document.getElementById("roundResult").innerHTML =
+            userName + " wins this round!";
+    }
+
+    else {
+        computerWins = computerWins + 1;
+
+        document.getElementById("roundResult").innerHTML =
+            "Empire wins this round!";
+    }
+
+    updateScore();
+}
+
+
 
 
 function updateScore() {
-  scoreDisplay.textContent = `Score: ${score}`;
-  scoreDisplay.style.textShadow = `0 0 10px ${glowColor}, 0 0 20px ${glowColor}`;
 
-  if (cpuChoiceDisplay) {
-    cpuChoiceDisplay.style.color = glowColor;
-    cpuChoiceDisplay.style.textShadow = `0 0 10px ${glowColor}, 0 0 20px ${glowColor} inset`;
-  }
+    document.getElementById("userScore").innerHTML =
+        "Your Wins: " + userWins;
+
+    document.getElementById("computerScore").innerHTML =
+        "Empire Wins: " + computerWins;
 }
 
 
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    const playerMove = button.getAttribute("data-move");
-    const computerMove = choices[Math.floor(Math.random() * choices.length)];
 
 
-    if (cpuChoiceDisplay) {
-      cpuChoiceDisplay.textContent = `CPU picked: ${computerMove.toUpperCase()}`;
+function updateRoundDisplay() {
+
+    document.getElementById("roundDisplay").innerHTML =
+        "Round: " + roundNumber + " / " + maxRounds;
+}
+
+
+
+
+function endGame() {
+
+    var randomWin =
+        Math.floor(Math.random() * winMessages.length);
+
+    var randomLose =
+        Math.floor(Math.random() * loseMessages.length);
+
+    if (userWins > computerWins) {
+
+        document.getElementById("finalResult").innerHTML =
+            userName + " wins the galaxy! " +
+            winMessages[randomWin];
     }
 
-    let result = "";
+    else if (computerWins > userWins) {
 
-    if (playerMove === computerMove) {
-      result = "It's a Tie!";
-    } else if (beats[playerMove] === computerMove) {
-      result = "You Win!";
-      score++;
-    } else {
-      result = "You Lose!";
-      score = score > 0 ? score - 1 : 0;
+        document.getElementById("finalResult").innerHTML =
+            "Empire wins the galaxy! " +
+            loseMessages[randomLose];
     }
 
+    else {
 
-    updateScore();
-    showWinner(playerMove, computerMove, result);
-  });
-});
+        document.getElementById("finalResult").innerHTML =
+            "The galaxy remains in balance.";
+    }
+
+    document.getElementById("resetBtn").style.display =
+        "inline-block";
+}
 
 
-updateScore();
+
+
+function resetGame() {
+
+    userWins = 0;
+    computerWins = 0;
+    roundNumber = 0;
+
+    document.getElementById("userScore").innerHTML =
+        "Your Wins: 0";
+
+    document.getElementById("computerScore").innerHTML =
+        "Empire Wins: 0";
+
+    document.getElementById("displayChoices").innerHTML = "";
+    document.getElementById("roundResult").innerHTML = "";
+    document.getElementById("finalResult").innerHTML = "";
+
+    document.getElementById("resetBtn").style.display =
+        "none";
+
+    updateRoundDisplay();
+}
